@@ -1,5 +1,7 @@
 const express = require('express');
 const indexRouter = require('./Routes/indexRouter');
+const brandRouter = require('./Routes/brandRouter');
+const categoryRouter = require('./Routes/categoryRouter');
 const path = require('path');
 
 const PORT = process.env.PORT || 8080;
@@ -12,6 +14,8 @@ const assetsPath = path.join(__dirname, "public"); // TODO: search info on how e
 app.use(express.static(assetsPath));
 
 app.use('/', indexRouter);
+app.use('/brand', brandRouter);
+app.use('/category', categoryRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}, enjoy! ;)`);
