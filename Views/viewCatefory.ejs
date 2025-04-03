@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relytory <%= catName %></title>
+</head>
+<body>
+  <h3><%= catName %> Bikes</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Speeds</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Brand</th>
+      <th>Category</th>
+    </tr>
+    <% bikes.forEach((bike) => { %>
+      <tr>
+        <td><%= bike.name %></td>
+        <td><%= bike.speed %></td>
+        <td><%= bike.quantity %></td>
+        <td><%= bike.price %></td>
+        <td><%= bike.brand %></td>
+        <td><%= bike.category %></td>
+      </tr>
+    <% }) %>
+  </table>
+  <!-- TODO: footer -->
+</body>
+</html>

@@ -1,5 +1,9 @@
 exports.indexGet = (req, res) => {
-  res.send('Hello category');
+  res.render('category', { categories: [
+    {name: 'Hardtail'},
+    {name: 'Road'},
+    {name: 'Full suspension'}
+  ]});
 }
 
 exports.categoryGet = (req, res) => {  

@@ -1,3 +1,3 @@
 exports.indexGet = (req, res) => {
-  res.send('Ayo');
+  res.render('index');
 };
