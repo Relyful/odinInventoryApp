@@ -23,4 +23,13 @@ exports.brandGet = async (req, res) => {
       }
     ]
   });
+};
+
+exports.newBrandGet = (req, res) => {
+  res.render('createBrand');
 }
+
+exports.newBrandPost = async (req, res) => {
+  const data = req.body;
+  res.send(data);
+};

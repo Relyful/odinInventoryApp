@@ -4,6 +4,8 @@ const categoryController = require('../Controllers/categoryController');
 const categoryRouter = Router();
 
 categoryRouter.get('/', categoryController.indexGet);
-categoryRouter.get('/:category', categoryController.categoryGet);
+categoryRouter.get('/:category/bikes', categoryController.categoryGet);
+categoryRouter.get('/new', categoryController.newCategoryGet);
+categoryRouter.post('/new', categoryController.newCategoryPost);
 
 module.exports = categoryRouter;

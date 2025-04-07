@@ -5,7 +5,7 @@ exports.indexGet = async (req, res) => {
     {name: 'Road'},
     {name: 'Full suspension'}
   ]});
-}
+};
 
 exports.categoryGet = async (req, res) => {
   const cat = req.params.category;
@@ -24,4 +24,13 @@ exports.categoryGet = async (req, res) => {
       }
     ]
   });
+};
+
+exports.newCategoryGet = (req, res) => {
+  res.render('createCategory');
+};
+
+exports.newCategoryPost = (req, res) => {
+  const data = req.body;
+  res.send(data);
 }
