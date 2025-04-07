@@ -1,4 +1,5 @@
-exports.indexGet = (req, res) => {
+exports.indexGet = async (req, res) => {
+  const rows = await pool.query("SELECT name from brands"); //Apply rows to render
   res.render('brands', { brands: [
     {name: 'CTM'},
     {name: 'Canyon'},
@@ -6,8 +7,9 @@ exports.indexGet = (req, res) => {
   ] });
 }
 
-exports.brandGet = (req, res) => {
+exports.brandGet = async (req, res) => {
   const brand = req.params.brand;
+  const { rows } = await pool.query("SELECT * FROM bikes WHERE brand_id = (SELECT id FROM brands WHERE name = ($1))", [brand]); // apply rows
   res.render('viewBrand', {
     brandName: brand,
     bikes: [
