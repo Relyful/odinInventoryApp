@@ -3,6 +3,7 @@ const indexRouter = require('./Routes/indexRouter');
 const brandRouter = require('./Routes/brandRouter');
 const categoryRouter = require('./Routes/categoryRouter');
 const path = require('path');
+require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
 const app = express();
