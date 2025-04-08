@@ -14,3 +14,9 @@ exports.newBikeGet = (req, res) => {
     ]
    });
 };
+
+exports.newBikePost = (req, res) => {
+  const data = req.body; 
+  console.log(data);
+  res.send(data);  
+};

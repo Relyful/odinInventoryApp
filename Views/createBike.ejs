@@ -6,7 +6,7 @@
   <title>Relytory new bike</title>
 </head>
 <body>
-  <form action="" method="post">
+  <form action="" method="post" onsubmit="this.submit(); this.reset(); return false;">
     <label for="bikeName">Name: </label>
     <input type="text" name="bikeName" id="name">
     <label for="bikeSpeeds">Speeds: </label>
@@ -16,19 +16,19 @@
     <label for="bikePrice">Price: </label>
     <input type="number" name="bikePrice" id="price">
     <label for="bikeBrand">Brand: </label>
-    <input list="brands" name="bikeBrand" id="brands">
-    <datalist id="brands">
+    <select name="bikeBrand" id="brands">
+      <option value="" disabled hidden selected>--Choose an option--</option>
       <% brands.forEach((brand) => { %>
-        <option value=<%= brand.name %>></option>
+        <option value=<%= brand.name %>><%= brand.name %></option>
       <% }) %>
-    </datalist>
+    </select>      
     <label for="bikeCategory">Category: </label>
-    <input list="categories" name="bikeCategory" id="category">
-    <datalist id="categories">
+    <select name="bikeCategory" id="category">
+      <option value="" disabled hidden selected>--Choose an option--</option>
       <% categories.forEach((category) => { %>
-        <option value=<%= category.name %>></option>
+        <option value=<%= category.name %>><%= category.name %></option>
       <% }) %>
-    </datalist>
+    </select>      
     <button type="submit">Submit</button>
   </form>
 </body>
