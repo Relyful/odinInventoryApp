@@ -7,7 +7,29 @@
 </head>
 <body>
   <form action="" method="post">
-    
+    <label for="bikeName">Name: </label>
+    <input type="text" name="bikeName" id="name">
+    <label for="bikeSpeeds">Speeds: </label>
+    <input type="text" name="bikeSpeeds" id="speeds">
+    <label for="bikeQuantity">Quantity: </label>
+    <input type="number" name="bikeQuantity" id="quantity">
+    <label for="bikePrice">Price: </label>
+    <input type="number" name="bikePrice" id="price">
+    <label for="bikeBrand">Brand: </label>
+    <input list="brands" name="bikeBrand" id="brands">
+    <datalist id="brands">
+      <% brands.forEach((brand) => { %>
+        <option value=<%= brand.name %>></option>
+      <% }) %>
+    </datalist>
+    <label for="bikeCategory">Category: </label>
+    <input list="categories" name="bikeCategory" id="category">
+    <datalist id="categories">
+      <% categories.forEach((category) => { %>
+        <option value=<%= category.name %>></option>
+      <% }) %>
+    </datalist>
+    <button type="submit">Submit</button>
   </form>
 </body>
 </html>

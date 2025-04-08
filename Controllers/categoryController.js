@@ -9,7 +9,7 @@ exports.indexGet = async (req, res) => {
 
 exports.categoryGet = async (req, res) => {
   const cat = req.params.category;
-  const { rows } = await pool.query("SELECT * FROM bikes WHERE category = (SELECT id FROM category WHERE name = $(1))", [cat])
+  const { rows } = await pool.query("SELECT * FROM bikes WHERE category = (SELECT id FROM category WHERE name = $(1))", [cat]);
   console.log(cat);
   res.render('viewCategory', { 
     catName: cat, 
