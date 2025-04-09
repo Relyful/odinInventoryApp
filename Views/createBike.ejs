@@ -19,14 +19,14 @@
     <select name="bikeBrand" id="brands">
       <option value="" disabled hidden selected>--Choose an option--</option>
       <% brands.forEach((brand) => { %>
-        <option value=<%= brand.name %>><%= brand.name %></option>
+        <option value="<%= brand.brand_name %>"><%= brand.brand_name %></option>
       <% }) %>
     </select>      
     <label for="bikeCategory">Category: </label>
     <select name="bikeCategory" id="category">
       <option value="" disabled hidden selected>--Choose an option--</option>
       <% categories.forEach((category) => { %>
-        <option value=<%= category.name %>><%= category.name %></option>
+        <option value="<%= category.cat_name %>"><%= category.cat_name %></option>
       <% }) %>
     </select>      
     <button type="submit">Submit</button>

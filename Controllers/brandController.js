@@ -1,27 +1,19 @@
+const pool = require('../db/pool');
+
 exports.indexGet = async (req, res) => {
-  const rows = await pool.query("SELECT name from brands"); //Apply rows to render
-  res.render('brands', { brands: [
-    {name: 'CTM'},
-    {name: 'Canyon'},
-    {name: 'Commencal'}
-  ] });
+  const { rows } = await pool.query("SELECT brand_name from brands"); //Apply rows to render
+  res.render('brands', { 
+    brands: rows,
+  });
 }
 
 exports.brandGet = async (req, res) => {
   const brand = req.params.brand;
-  const { rows } = await pool.query("SELECT * FROM bikes WHERE brand_id = (SELECT id FROM brands WHERE name = ($1))", [brand]); // apply rows
+  const { rows } = await pool.query("SELECT bikes.*, category.cat_name, brands.brand_name FROM bikes JOIN brands ON bikes.brand_id = brands.id JOIN category ON bikes.category_id = category.id WHERE brand_id = (SELECT id FROM brands WHERE brand_name = ($1))", [brand]); // apply rows
+  console.log(rows);
   res.render('viewBrand', {
     brandName: brand,
-    bikes: [
-      {
-        name: 'Zephyr Pro',
-        speeds: 12,
-        quantity: 420,
-        price: 1337,
-        brand: brand,
-        category: 'Hardtail'
-      }
-    ]
+    bikes: rows
   });
 };
 
@@ -31,5 +23,7 @@ exports.newBrandGet = (req, res) => {
 
 exports.newBrandPost = async (req, res) => {
   const data = req.body;
-  res.send(data);
+  await pool.query(`INSERT INTO brands (brand_name, country)
+    VALUES ($1, $2)`, [data.brandName, data.brandCountry]);
+  res.redirect('/brand');
 };
