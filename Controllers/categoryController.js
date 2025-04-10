@@ -1,22 +1,19 @@
 const pool = require("../db/pool");
+const db = require('../db/queries');
 
 exports.indexGet = async (req, res) => {
-  const { rows } = await pool.query("SELECT cat_name FROM category");
+  const categories = await db.getCategoryNames();
   res.render("category", {
-    categories: rows
+    categories
   });
 };
 
 exports.categoryGet = async (req, res) => {
   const cat = req.params.category;
-  const { rows } = await pool.query(
-    "SELECT bikes.*, brands.brand_name, category.cat_name FROM bikes JOIN category on bikes.category_id = category.id JOIN brands on bikes.brand_id = brands.id WHERE category_id = (SELECT id FROM category WHERE category.cat_name = ($1))",
-    [cat]
-  );
-  console.log(rows);
+  const bikes = await db.getAllCategoryBikes(cat);
   res.render("viewCategory", {
     catName: cat,
-    bikes: rows,
+    bikes,
   });
 };
 
@@ -26,6 +23,6 @@ exports.newCategoryGet = (req, res) => {
 
 exports.newCategoryPost = async (req, res) => {
   const data = req.body.catName;
-  await pool.query("INSERT INTO category (cat_name) VALUES ($1)", [data]);
-  res.redirect(`/category/${data}/bikes`);
+  await db.postNewCategory(data);
+  res.redirect(`/category`);
 };

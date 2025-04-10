@@ -21,9 +21,28 @@ async function postNewBrand(data) {
       return;
 };
 
+async function getAllCategoryBikes(category) {
+  const { rows } = await pool.query(
+    `SELECT bikes.*, brands.brand_name, category.cat_name 
+    FROM bikes 
+    JOIN category on bikes.category_id = category.id 
+    JOIN brands on bikes.brand_id = brands.id 
+    WHERE category_id = (SELECT id FROM category WHERE category.cat_name = ($1))`,
+    [category]
+  );
+  return rows;
+};
+
+async function postNewCategory(data) {
+  await pool.query("INSERT INTO category (cat_name) VALUES ($1)", [data]);
+  return;
+}
+
 module.exports = {
   getCategoryNames,
   getBrandNames,
   getAllBrandBikes,
   postNewBrand,
+  getAllCategoryBikes,
+  postNewCategory,
 };
