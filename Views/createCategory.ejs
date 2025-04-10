@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relytory New category</title>
+  <title>Relytory <%= action %> category</title>
 </head>
 <body>
-  <h3>Create new category</h3>
+  <h3><%= action %> category</h3>
   <form action="" method="post">
     <label for="catName">Category name: </label>
-    <input type="text" name="catName" id="name">
+    <input type="text" name="catName" id="name" value="<%= defVal %>">
     <button type="submit">Submit</button>
   </form>
 </body>

@@ -18,11 +18,32 @@ exports.categoryGet = async (req, res) => {
 };
 
 exports.newCategoryGet = (req, res) => {
-  res.render("createCategory");
+  res.render("createCategory", {
+    action: 'Create',
+    defVal: '',
+  });
 };
 
 exports.newCategoryPost = async (req, res) => {
   const data = req.body.catName;
   await db.postNewCategory(data);
   res.redirect(`/category`);
+};
+
+exports.updateCategoryGet = async (req, res) => {
+  const categoryId = req.params.catId;
+  const category = await db.getCategoryFromId(categoryId);
+  res.render('createCategory', {
+    action: 'Update',
+    defVal: category.cat_name,
+  });
+};
+
+exports.updateCategoryPost = async (req, res) => {
+const categoryId = req.params.catId;
+const categoryName = req.body.catName;
+await pool.query(`UPDATE category
+  SET cat_name = $2
+  WHERE id = $1`, [categoryId, categoryName]);
+res.redirect('/category');
 };

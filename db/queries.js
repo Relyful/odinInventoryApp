@@ -44,6 +44,11 @@ async function postNewBike(data){
     [data.bikeName, data.bikeSpeeds, data.bikeQuantity, data.bikePrice, data.bikeBrand, data.bikeCategory]);
 };
 
+async function getCategoryFromId(id) {
+  const { rows } = await pool.query(`SELECT * FROM category WHERE id = $1`, [id]);
+  return rows[0];
+};
+
 module.exports = {
   getCategoryNames,
   getBrandNames,
@@ -52,4 +57,5 @@ module.exports = {
   getAllCategoryBikes,
   postNewCategory,
   postNewBike,
+  getCategoryFromId,
 };
