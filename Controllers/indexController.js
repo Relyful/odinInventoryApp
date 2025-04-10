@@ -1,14 +1,13 @@
 const pool = require('../db/pool');
+const db = require('../db/queries');
 
 exports.indexGet = (req, res) => {
   res.render('index');
 };
 
 exports.newBikeGet = async (req, res) => {
-  const categoriesQ = await pool.query(`SELECT cat_name FROM category`);
-  const brandsQ = await pool.query(`SELECT brand_name FROM brands`);
-  const brands = brandsQ.rows;
-  const categories = categoriesQ.rows;
+  const categories = await db.getCategoryNames();
+  const brands = await db.getBrandNames();
   console.log(brands, categories);  
   res.render('createBike', { 
     brands: brands,
