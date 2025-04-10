@@ -36,7 +36,13 @@ async function getAllCategoryBikes(category) {
 async function postNewCategory(data) {
   await pool.query("INSERT INTO category (cat_name) VALUES ($1)", [data]);
   return;
-}
+};
+
+async function postNewBike(data){
+  await pool.query(`INSERT INTO bikes (bike_name, speeds, quantity, price, brand_id, category_id) 
+    VALUES ($1, $2, $3 ,$4, (SELECT id FROM brands WHERE brand_name = $5), (SELECT id FROM category WHERE cat_name = $6))`, 
+    [data.bikeName, data.bikeSpeeds, data.bikeQuantity, data.bikePrice, data.bikeBrand, data.bikeCategory]);
+};
 
 module.exports = {
   getCategoryNames,
@@ -45,4 +51,5 @@ module.exports = {
   postNewBrand,
   getAllCategoryBikes,
   postNewCategory,
+  postNewBike,
 };

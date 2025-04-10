@@ -15,9 +15,9 @@ exports.newBikeGet = async (req, res) => {
    });
 };
 
-exports.newBikePost = (req, res) => {
+exports.newBikePost = async (req, res) => {
   const data = req.body; 
-  //"INSERT INTO bikes (name, speeds, quantity, price, brand, category) VALUES ($1, $2, $3 ,$4, $5, $6)"
+  db.postNewBike(data);
   console.log(data);
-  res.send(data);  
+  res.redirect('/');  
 };
