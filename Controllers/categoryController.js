@@ -1,21 +1,22 @@
 const pool = require("../db/pool");
 const db = require('../db/queries');
+const asyncHandler = require('express-async-handler');
 
-exports.indexGet = async (req, res) => {
+exports.indexGet = asyncHandler(async (req, res) => {
   const categories = await db.getCategoryNames();
   res.render("category", {
     categories
   });
-};
+});
 
-exports.categoryGet = async (req, res) => {
+exports.categoryGet = asyncHandler(async (req, res) => {
   const cat = req.params.category;
   const bikes = await db.getAllCategoryBikes(cat);
   res.render("viewCategory", {
     catName: cat,
     bikes,
   });
-};
+});
 
 exports.newCategoryGet = (req, res) => {
   res.render("createCategory", {
@@ -24,26 +25,26 @@ exports.newCategoryGet = (req, res) => {
   });
 };
 
-exports.newCategoryPost = async (req, res) => {
+exports.newCategoryPost = asyncHandler(async (req, res) => {
   const data = req.body.catName;
   await db.postNewCategory(data);
   res.redirect(`/category`);
-};
+});
 
-exports.updateCategoryGet = async (req, res) => {
+exports.updateCategoryGet = asyncHandler(async (req, res) => {
   const categoryId = req.params.catId;
   const category = await db.getCategoryFromId(categoryId);
   res.render('createCategory', {
     action: 'Update',
     defVal: category.cat_name,
   });
-};
+});
 
-exports.updateCategoryPost = async (req, res) => {
+exports.updateCategoryPost = asyncHandler(async (req, res) => {
 const categoryId = req.params.catId;
 const categoryName = req.body.catName;
 await pool.query(`UPDATE category
   SET cat_name = $2
   WHERE id = $1`, [categoryId, categoryName]);
 res.redirect('/category');
-};
+});
