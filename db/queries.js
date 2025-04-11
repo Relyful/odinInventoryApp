@@ -52,6 +52,20 @@ async function getCategoryFromId(id) {
 async function getBrandFromId(id) {
   const { rows } = await pool.query(`SELECT * FROM brands WHERE id = $1`, [id]);
   return rows[0];
+};
+
+async function getBikeFromId(id) {
+  const { rows } = await pool.query(`SELECT bikes.*, brands.brand_name, category.cat_name
+    FROM bikes JOIN brands ON bikes.brand_id = brands.id
+    JOIN category ON bikes.category_id = category.id
+    WHERE bikes.id = $1`, [id]);
+    console.log(rows)
+    return rows[0];
+};
+
+async function postUpdateBike(data, bikeId) {
+  await pool.query(`UPDATE bikes SET bike_name = $1, speeds = $2, quantity = $3, price = $4, brand_id = (SELECT id FROM brands WHERE brand_name = $5), category_id = (SELECT id FROM category WHERE cat_name = $6)
+    WHERE id = $7`, [data.bikeName, data.bikeSpeeds, data.bikeQuantity, data.bikePrice, data.bikeBrand, data.bikeCategory, bikeId]);
 }
 
 module.exports = {
@@ -64,4 +78,6 @@ module.exports = {
   postNewBike,
   getCategoryFromId,
   getBrandFromId,
+  getBikeFromId,
+  postUpdateBike,
 };

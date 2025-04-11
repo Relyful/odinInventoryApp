@@ -9,10 +9,13 @@ exports.indexGet = (req, res) => {
 exports.newBikeGet = asyncHandler(async (req, res) => {
   const categories = await db.getCategoryNames();
   const brands = await db.getBrandNames();
-  console.log(brands, categories);  
   res.render('createBike', { 
+    action: 'Create',
     brands: brands,
-    categories: categories
+    categories: categories,
+    bike: null,
+    selectedBrand: null,
+    selectedCategory: null,
    });
 });
 
@@ -22,3 +25,25 @@ exports.newBikePost = asyncHandler(async (req, res) => {
   console.log(data);
   res.redirect('/');  
 });
+
+exports.updateBikeGet = asyncHandler(async (req, res) => {
+  const bikeId = req.params.bikeId;
+  const bike = await db.getBikeFromId(bikeId);
+  const brands = await db.getBrandNames();
+  const categories = await db.getCategoryNames();
+  res.render('createBike', { 
+    action: 'Update',
+    brands: brands,
+    categories: categories,
+    bike, 
+    selectedBrand: bike.brand_name,
+    selectedCategory: bike.cat_name,
+   });
+});
+
+exports.updateBikePost = asyncHandler(async (req, res) => {
+  const bikeId = req.params.bikeId;
+  const data = req.body;
+  await db.postUpdateBike(data, bikeId);
+  res.redirect('/');  
+})
