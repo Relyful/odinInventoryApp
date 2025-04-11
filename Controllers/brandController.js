@@ -27,3 +27,24 @@ exports.newBrandPost = asyncHandler(async (req, res) => {
   await db.postNewBrand(data);
   res.redirect('/brand');
 });
+
+exports.updateBrandGet = asyncHandler(async (req, res) => {
+  const brandId = req.params.brandId;
+  const brand = await db.getBrandFromId(brandId);
+  if (!brand) {
+    throw new Error("Brand not found!");
+  }
+  console.log(brand);  
+  res.render('createBrand', {
+    action: 'Update',
+    brand,
+  })
+});
+
+exports.updateBrandPost = asyncHandler(async (req, res) => {
+  const brandId = req.params.brandId;
+  const brandName = req.body.brandName;
+  await pool.query(`UPDATE brands SET brand_name = $1
+    WHERE id = $2`, [brandName, brandId]);
+  res.redirect('/brand');
+});

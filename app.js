@@ -20,8 +20,8 @@ app.use('/category', categoryRouter);
 
 //Error middleware
 app.use((err, req, res, next) => {
-  console.error(error);
-  res.status(500).send(err);
+  console.error(err);
+  res.status(500).send(err.message);
 });
 
 app.listen(PORT, () => {

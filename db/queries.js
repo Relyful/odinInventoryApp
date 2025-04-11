@@ -49,6 +49,11 @@ async function getCategoryFromId(id) {
   return rows[0];
 };
 
+async function getBrandFromId(id) {
+  const { rows } = await pool.query(`SELECT * FROM brands WHERE id = $1`, [id]);
+  return rows[0];
+}
+
 module.exports = {
   getCategoryNames,
   getBrandNames,
@@ -58,4 +63,5 @@ module.exports = {
   postNewCategory,
   postNewBike,
   getCategoryFromId,
+  getBrandFromId,
 };

@@ -34,6 +34,9 @@ exports.newCategoryPost = asyncHandler(async (req, res) => {
 exports.updateCategoryGet = asyncHandler(async (req, res) => {
   const categoryId = req.params.catId;
   const category = await db.getCategoryFromId(categoryId);
+  if(!category) {
+    throw new Error("Category does not exist!")
+  }
   res.render('createCategory', {
     action: 'Update',
     defVal: category.cat_name,

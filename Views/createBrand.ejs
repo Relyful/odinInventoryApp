@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relytory create brand</title>
+  <title>Relytory <%= action %> brand</title>
 </head>
 <body>
-  <h3>Create new brand</h3>
+  <h3><%= action %> brand</h3>
   <form action="" method="post">
     <label for="brandName">Name: </label>
-    <input type="text" name="brandName" id="name">
+    <input type="text" name="brandName" id="name" value="<%= brand.brand_name %>">
     <label for="brandCountry">Country: </label>
-    <input type="text" name="brandCountry" id="country">
+    <input type="text" name="brandCountry" id="country" value="<%= brand.country%>">
     <button type="submit">Submit</button>
   </form>
 </body>
