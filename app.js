@@ -18,6 +18,12 @@ app.use('/', indexRouter);
 app.use('/brand', brandRouter);
 app.use('/category', categoryRouter);
 
+//Error middleware
+app.use((err, req, res, next) => {
+  console.error(error);
+  res.status(500).send(err);
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}, enjoy! ;)`);
 });
