@@ -59,7 +59,6 @@ async function getBikeFromId(id) {
     FROM bikes JOIN brands ON bikes.brand_id = brands.id
     JOIN category ON bikes.category_id = category.id
     WHERE bikes.id = $1`, [id]);
-    console.log(rows)
     return rows[0];
 };
 
