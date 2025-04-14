@@ -46,4 +46,4 @@ exports.updateBikePost = asyncHandler(async (req, res) => {
   const data = req.body;
   await db.postUpdateBike(data, bikeId);
   res.redirect('/');  
-})
+});

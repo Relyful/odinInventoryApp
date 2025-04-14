@@ -51,3 +51,9 @@ exports.updateBrandPost = asyncHandler(async (req, res) => {
     WHERE id = $2`, [brandName, brandId]);
   res.redirect('/brand');
 });
+
+exports.deleteBrandGet = asyncHandler(async (req, res) => {
+  const brandId = req.params.brandId;
+  await pool.query('DELETE FROM brands WHERE id = $1', [brandId]);
+  res.redirect('/brand');
+})
