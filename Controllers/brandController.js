@@ -19,7 +19,10 @@ exports.brandGet = asyncHandler(async (req, res) => {
 });
 
 exports.newBrandGet = (req, res) => {
-  res.render('createBrand');
+  res.render('createBrand', {
+    action: 'Create',
+    brand: null,
+  });
 };
 
 exports.newBrandPost = asyncHandler(async (req, res) => {
