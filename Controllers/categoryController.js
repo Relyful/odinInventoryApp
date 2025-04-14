@@ -51,3 +51,9 @@ await pool.query(`UPDATE category
   WHERE id = $1`, [categoryId, categoryName]);
 res.redirect('/category');
 });
+
+exports.deleteCategoryGet = asyncHandler(async (req, res) => {
+  const categoryId = req.params.categoryId;
+  await pool.query('DELETE FROM category WHERE id = $1', [categoryId]);
+  res.redirect('/category');
+})
