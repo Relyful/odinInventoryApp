@@ -12,8 +12,8 @@ exports.indexGet = asyncHandler(async (req, res) => {
 exports.brandGet = asyncHandler(async (req, res) => {
   const brand = req.params.brand;
   const bikes = await db.getAllBrandBikes(brand);
-  res.render('viewBrand', {
-    brandName: brand,
+  res.render('viewBike', {
+    action: brand,
     bikes: bikes
   });
 });

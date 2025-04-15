@@ -12,8 +12,8 @@ exports.indexGet = asyncHandler(async (req, res) => {
 exports.categoryGet = asyncHandler(async (req, res) => {
   const cat = req.params.category;
   const bikes = await db.getAllCategoryBikes(cat);
-  res.render("viewCategory", {
-    catName: cat,
+  res.render("viewBike", {
+    action: cat,
     bikes,
   });
 });
