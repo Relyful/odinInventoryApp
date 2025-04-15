@@ -47,3 +47,11 @@ exports.updateBikePost = asyncHandler(async (req, res) => {
   await db.postUpdateBike(data, bikeId);
   res.redirect('/');  
 });
+
+exports.allBikesGet = asyncHandler(async (req, res) => {
+  const bikes = await db.getAllBikes();
+  res.render('viewBike', {
+    action: 'All',
+    bikes,
+  });
+});

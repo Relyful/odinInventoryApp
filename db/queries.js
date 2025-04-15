@@ -65,6 +65,14 @@ async function getBikeFromId(id) {
 async function postUpdateBike(data, bikeId) {
   await pool.query(`UPDATE bikes SET bike_name = $1, speeds = $2, quantity = $3, price = $4, brand_id = (SELECT id FROM brands WHERE brand_name = $5), category_id = (SELECT id FROM category WHERE cat_name = $6)
     WHERE id = $7`, [data.bikeName, data.bikeSpeeds, data.bikeQuantity, data.bikePrice, data.bikeBrand, data.bikeCategory, bikeId]);
+};
+
+async function getAllBikes() {
+  const { rows } = await pool.query(`SELECT bikes.*, brands.brand_name, category.cat_name 
+    FROM bikes 
+    JOIN category on bikes.category_id = category.id 
+    JOIN brands on bikes.brand_id = brands.id`);
+  return rows;
 }
 
 module.exports = {
@@ -79,4 +87,5 @@ module.exports = {
   getBrandFromId,
   getBikeFromId,
   postUpdateBike,
+  getAllBikes,
 };
