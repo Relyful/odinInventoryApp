@@ -1,12 +1,12 @@
 const pool = require('./pool');
 
 async function getCategoryNames() {
-  const { rows } = await pool.query(`SELECT cat_name FROM category`);
+  const { rows } = await pool.query(`SELECT * FROM category ORDER BY id`);
   return rows;
 };
 
 async function getBrandNames() {
-  const { rows } = await pool.query(`SELECT brand_name FROM brands`);
+  const { rows } = await pool.query(`SELECT * FROM brands ORDER BY id`);
   return rows;
 };
 

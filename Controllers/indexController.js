@@ -23,7 +23,7 @@ exports.newBikePost = asyncHandler(async (req, res) => {
   const data = req.body; 
   db.postNewBike(data);
   console.log(data);
-  res.redirect('/');  
+  res.redirect('/allBikes');  
 });
 
 exports.updateBikeGet = asyncHandler(async (req, res) => {
