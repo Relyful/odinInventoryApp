@@ -40,6 +40,7 @@ exports.newBrandPost = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).send(errors);
+      return;
     };
     await db.postNewBrand(data);
     res.redirect('/brand');
@@ -63,6 +64,11 @@ exports.updateBrandPost = [
   asyncHandler(async (req, res) => {
     const brandId = req.params.brandId;
     const brandName = req.body.brandName;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).send(errors);
+      return;
+    };
     await pool.query(`UPDATE brands SET brand_name = $1
       WHERE id = $2`, [brandName, brandId]);
     res.redirect('/brand');
