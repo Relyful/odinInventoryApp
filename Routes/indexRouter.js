@@ -9,5 +9,6 @@ indexRouter.post('/newBike', indexController.newBikePost);
 indexRouter.get('/:bikeId/updateBike', indexController.updateBikeGet)
 indexRouter.post('/:bikeId/updateBike', indexController.updateBikePost);
 indexRouter.get('/allBikes', indexController.allBikesGet);
+indexRouter.get('/:bikeId/deleteBike', indexController.deleteBikeGet);
 
 module.exports = indexRouter;
