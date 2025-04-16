@@ -17,6 +17,8 @@
       <th>Price</th>
       <th>Brand</th>
       <th>Category</th>
+      <th>Update</th>
+      <th>Delete</th>
     </tr>
     <% bikes.forEach((bike) => { %>
       <tr>
@@ -26,6 +28,8 @@
         <td><%= bike.price %></td>
         <td><%= bike.brand_name %></td>
         <td><%= bike.cat_name %></td>
+        <td><a href="/<%= bike.id %>/updateBike">Update</a></td>
+        <td><a href="/<%= bike.id %>/deleteBike">Delete</a></td>
       </tr>
     <% }) %>
   </table>

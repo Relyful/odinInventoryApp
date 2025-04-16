@@ -73,6 +73,10 @@ async function getAllBikes() {
     JOIN category on bikes.category_id = category.id 
     JOIN brands on bikes.brand_id = brands.id`);
   return rows;
+};
+
+async function deleteBikeFromId(id) {
+  await pool.query(`DELETE FROM bikes WHERE id = $1`, [id]);
 }
 
 module.exports = {
@@ -88,4 +92,5 @@ module.exports = {
   getBikeFromId,
   postUpdateBike,
   getAllBikes,
+  deleteBikeFromId
 };
