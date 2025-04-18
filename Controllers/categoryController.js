@@ -38,13 +38,17 @@ exports.newCategoryGet = (req, res) => {
 exports.newCategoryPost = [
   categoryValidation,
   asyncHandler(async (req, res) => {
-    const data = req.body.catName;
+    const categoryName = req.body.catName;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).send(errors);
+      res.status(400).render("createCategory", {
+        errors: errors.array(),
+        action: "Create",
+        defVal: categoryName,
+      });
       return;
     }
-    await db.postNewCategory(data);
+    await db.postNewCategory(categoryName);
     res.redirect(`/category`);
   }),
 ];
@@ -68,7 +72,11 @@ exports.updateCategoryPost = [
     const categoryName = req.body.catName;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.sendStatus().send(errors);
+      res.status(400).render("createCategory", {
+        errors: errors.array(),
+        action: "Create",
+        defVal: categoryName
+      });
       return;
     }
     await pool.query(

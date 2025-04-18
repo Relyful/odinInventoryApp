@@ -59,7 +59,22 @@ exports.newBikePost = [
     const data = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).send(errors);
+      const brands = await db.getBrandNames();
+      const categories = await db.getCategoryNames();
+      res.status(400).render("createBike", {
+        errors: errors.array(),
+        action: "Create",
+        brands: brands,
+        categories: categories,
+        bike: {
+          bike_name: data.bikeName,
+          speeds: data.bikeSpeeds,
+          quantity: data.bikeQuantity,
+          price: data.bikePrice,
+        },
+        selectedBrand: data.bikeBrand,
+        selectedCategory: data.bikeCategory,
+      });
       return;
     }
     await db.postNewBike(data);
@@ -73,6 +88,7 @@ exports.updateBikeGet = asyncHandler(async (req, res) => {
   const bike = await db.getBikeFromId(bikeId);
   const brands = await db.getBrandNames();
   const categories = await db.getCategoryNames();
+  console.log(bike);
   res.render("createBike", {
     action: "Update",
     brands: brands,
@@ -90,7 +106,22 @@ exports.updateBikePost = [
     const data = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).send(errors);
+      const brands = await db.getBrandNames();
+      const categories = await db.getCategoryNames();
+      res.status(400).render("createBike", {
+        errors: errors.array(),
+        action: "Update",
+        brands: brands,
+        categories: categories,
+        bike: {
+          bike_name: data.bikeName,
+          speeds: data.bikeSpeeds,
+          quantity: data.bikeQuantity,
+          price: data.bikePrice,
+        },
+        selectedBrand: data.bikeBrand,
+        selectedCategory: data.bikeCategory,
+      });
       return;
     }
     await db.postUpdateBike(data, bikeId);

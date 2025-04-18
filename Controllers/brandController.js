@@ -1,18 +1,24 @@
-const pool = require('../db/pool');
-const db = require('../db/queries');
-const asyncHandler = require('express-async-handler');
-const { body, validationResult } = require('express-validator');
+const pool = require("../db/pool");
+const db = require("../db/queries");
+const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const validateBrand = [
-  body("brandName").trim()
-    .notEmpty().isAscii().withMessage('Brand name must only contain letters and numbers.'),
-  body("brandCountry").trim()
-    .notEmpty().isAscii().withMessage("Country must only contain letters and numbers.")
-]
+  body("brandName")
+    .trim()
+    .notEmpty()
+    .isAscii()
+    .withMessage("Brand name must only contain letters and numbers."),
+  body("brandCountry")
+    .trim()
+    .notEmpty()
+    .isAscii()
+    .withMessage("Country must only contain letters and numbers."),
+];
 
 exports.indexGet = asyncHandler(async (req, res) => {
   const brandNames = await db.getBrandNames(); //Apply rows to render
-  res.render('brands', { 
+  res.render("brands", {
     brands: brandNames,
   });
 });
@@ -20,15 +26,15 @@ exports.indexGet = asyncHandler(async (req, res) => {
 exports.brandGet = asyncHandler(async (req, res) => {
   const brand = req.params.brand;
   const bikes = await db.getAllBrandBikes(brand);
-  res.render('viewBike', {
+  res.render("viewBike", {
     action: brand,
-    bikes: bikes
+    bikes: bikes,
   });
 });
 
 exports.newBrandGet = (req, res) => {
-  res.render('createBrand', {
-    action: 'Create',
+  res.render("createBrand", {
+    action: "Create",
     brand: null,
   });
 };
@@ -39,12 +45,19 @@ exports.newBrandPost = [
     const data = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).send(errors);
+      res.status(400).render("createBrand", {
+        errors: errors.array(),
+        action: "Create",
+        brand: {
+          brand_name: data.brandName,
+          country: data.brandCountry,
+        },
+      });
       return;
-    };
+    }
     await db.postNewBrand(data);
-    res.redirect('/brand');
-  })
+    res.redirect("/brand");
+  }),
 ];
 
 exports.updateBrandGet = asyncHandler(async (req, res) => {
@@ -53,10 +66,10 @@ exports.updateBrandGet = asyncHandler(async (req, res) => {
   if (!brand) {
     throw new Error("Brand not found!");
   }
-  res.render('createBrand', {
-    action: 'Update',
+  res.render("createBrand", {
+    action: "Update",
     brand,
-  })
+  });
 });
 
 exports.updateBrandPost = [
@@ -66,17 +79,27 @@ exports.updateBrandPost = [
     const brandName = req.body.brandName;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).send(errors);
+      res.status(400).render("createBrand", {
+        errors: errors.array(),
+        action: "Update",
+        brand: {
+          brand_name: brandName,
+          country: req.body.brandCountry,
+        },
+      });
       return;
-    };
-    await pool.query(`UPDATE brands SET brand_name = $1
-      WHERE id = $2`, [brandName, brandId]);
-    res.redirect('/brand');
-  })
+    }
+    await pool.query(
+      `UPDATE brands SET brand_name = $1
+      WHERE id = $2`,
+      [brandName, brandId]
+    );
+    res.redirect("/brand");
+  }),
 ];
 
 exports.deleteBrandGet = asyncHandler(async (req, res) => {
   const brandId = req.params.brandId;
-  await pool.query('DELETE FROM brands WHERE id = $1', [brandId]);
-  res.redirect('/brand');
-})
+  await pool.query("DELETE FROM brands WHERE id = $1", [brandId]);
+  res.redirect("/brand");
+});

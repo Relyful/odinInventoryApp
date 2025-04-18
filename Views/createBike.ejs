@@ -8,9 +8,10 @@
 <body>
   <%- include('Partials/header') %>
   <h3><%= action %> Bike</h3>
+  <%- include('Partials/errors') %>
   <form action="" method="post" onsubmit="this.submit(); this.reset(); return false;">
     <label for="bikeName">Name: </label>
-    <input type="text" name="bikeName" id="name" <%= bike ? `value=${bike.bike_name}` : "" %>>
+    <input type="text" name="bikeName" id="name" value="<%= bike ? bike.bike_name : '' %>">
     <label for="bikeSpeeds">Speeds: </label>
     <input type="number" name="bikeSpeeds" id="speeds" <%= bike ? `value=${bike.speeds}` : "" %>>
     <label for="bikeQuantity">Quantity: </label>

@@ -1,0 +1,8 @@
+<% if (locals.errors) { %>
+  <h4>Errors: </h4>
+  <ul>
+    <% errors.forEach((error) => { %>
+      <li><%= error.path %>: <%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

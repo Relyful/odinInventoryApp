@@ -8,6 +8,7 @@
 <body>
   <%- include('Partials/header') %>
   <h3><%= action %> category</h3>
+  <%- include('Partials/errors') %>
   <form action="" method="post">
     <label for="catName">Category name: </label>
     <input type="text" name="catName" id="name" value="<%= defVal %>">
