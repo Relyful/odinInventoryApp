@@ -80,6 +80,50 @@ a {
   cursor: pointer;
 }
 
+.listContent {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 500px;
+  align-items: center;
+  gap: 50px;
+}
+
+.listContent .brands .card, .listContent .categories .card {
+  display: flex;
+  gap: 30px;
+}
+
+.brands, .categories {
+  width: 100%;
+}
+
+.listLink {
+  flex-grow: 1;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 45px;
+  border-radius: 10px;
+  padding: 0 20px 0 20px;
+}
+
+.card:hover {
+  border: 1px solid black;
+}
+
+.listContent .button {
+  padding: 7px;
+  border: 1px solid black;
+  border-radius: 5px;
+  flex-grow: 0;
+  max-width: 150px;
+}
+
 footer {
   flex-shrink: 0;
 }

@@ -8,18 +8,20 @@
 </head>
 <body>
   <%- include('Partials/header') %>
-  <h2>Pick a bike brand:</h2>
-  <a href="/brand/new" class="button">New Brand</a>
-  <div class="brands">
-    <% brands.forEach((brand) => { %>
-      <div class="card">
-        <a href="/brand/<%= brand.brand_name %>/bikes"><%= brand.brand_name %></a>
-        <div class="buttons">
-          <a href="/brand/<%= brand.id %>/update" class="button">Update</a>
-          <a href="/brand/<%= brand.id %>/delete" class="button">Delete</a>
+  <div class="listContent">
+    <h2>Pick a bike brand:</h2>
+    <a href="/brand/new" class="button">New Brand</a>
+    <div class="brands">
+      <% brands.forEach((brand) => { %>
+        <div class="card">
+          <a class="listLink" href="/brand/<%= brand.brand_name %>/bikes"><%= brand.brand_name %></a>
+          <div class="buttons">
+            <a href="/brand/<%= brand.id %>/update" class="button">Update</a>
+            <a href="/brand/<%= brand.id %>/delete" class="button">Delete</a>
+          </div>
         </div>
-      </div>
-    <% })  %>
+      <% })  %>
+    </div>
   </div>
   <%- include('Partials/footer') %>
 </body>
