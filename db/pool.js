@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = new Pool ({
   host: process.env.PGHOST,
-  user: process.env.PGUSER,
+  user: process.env.USER,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT
