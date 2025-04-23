@@ -8,33 +8,35 @@
 </head>
 <body>
   <%- include('Partials/header') %>
-  <h3><%= action %> Bike</h3>
-  <%- include('Partials/errors') %>
-  <form action="" method="post" onsubmit="this.submit(); this.reset(); return false;">
-    <label for="bikeName">Name: </label>
-    <input type="text" name="bikeName" id="name" value="<%= bike ? bike.bike_name : '' %>">
-    <label for="bikeSpeeds">Speeds: </label>
-    <input type="number" name="bikeSpeeds" id="speeds" <%= bike ? `value=${bike.speeds}` : "" %>>
-    <label for="bikeQuantity">Quantity: </label>
-    <input type="number" name="bikeQuantity" id="quantity" <%= bike ? `value=${bike.quantity}` : "" %>>
-    <label for="bikePrice">Price: </label>
-    <input type="number" name="bikePrice" id="price" <%= bike ? `value=${bike.price}` : "" %>>
-    <label for="bikeBrand">Brand: </label>
-    <select name="bikeBrand" id="brands">
-      <option value="" disabled hidden <%= !selectedBrand ? "selected" : "" %>>--Choose an option--</option>
-      <% brands.forEach((brand) => { %>
-        <option value="<%= brand.brand_name %>" <%= brand.brand_name === selectedBrand ? "selected" : "" %>><%= brand.brand_name %></option>
-      <% }) %>
-    </select>      
-    <label for="bikeCategory">Category: </label>
-    <select name="bikeCategory" id="category">
-      <option value="" disabled hidden <%= !selectedCategory ? "selected" : "" %>>--Choose an option--</option>
-      <% categories.forEach((category) => { %>
-        <option value="<%= category.cat_name %>" <%= category.cat_name === selectedCategory ? "selected" : "" %>><%= category.cat_name %></option>
-      <% }) %>
-    </select>      
-    <button type="submit">Submit</button>
-  </form>
+  <div class="listContent">
+    <h3><%= action %> Bike</h3>
+    <%- include('Partials/errors') %>
+    <form action="" method="post" onsubmit="this.submit(); this.reset(); return false;">
+      <label for="bikeName">Name: </label>
+      <input type="text" name="bikeName" id="name" value="<%= bike ? bike.bike_name : '' %>">
+      <label for="bikeSpeeds">Speeds: </label>
+      <input type="number" name="bikeSpeeds" id="speeds" <%= bike ? `value=${bike.speeds}` : "" %>>
+      <label for="bikeQuantity">Quantity: </label>
+      <input type="number" name="bikeQuantity" id="quantity" <%= bike ? `value=${bike.quantity}` : "" %>>
+      <label for="bikePrice">Price: </label>
+      <input type="number" name="bikePrice" id="price" <%= bike ? `value=${bike.price}` : "" %>>
+      <label for="bikeBrand">Brand: </label>
+      <select name="bikeBrand" id="brands">
+        <option value="" disabled hidden <%= !selectedBrand ? "selected" : "" %>>--Choose an option--</option>
+        <% brands.forEach((brand) => { %>
+          <option value="<%= brand.brand_name %>" <%= brand.brand_name === selectedBrand ? "selected" : "" %>><%= brand.brand_name %></option>
+        <% }) %>
+      </select>
+      <label for="bikeCategory">Category: </label>
+      <select name="bikeCategory" id="category">
+        <option value="" disabled hidden <%= !selectedCategory ? "selected" : "" %>>--Choose an option--</option>
+        <% categories.forEach((category) => { %>
+          <option value="<%= category.cat_name %>" <%= category.cat_name === selectedCategory ? "selected" : "" %>><%= category.cat_name %></option>
+        <% }) %>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
   <%- include('Partials/footer') %>
 </body>
 </html>

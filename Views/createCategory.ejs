@@ -8,13 +8,15 @@
 </head>
 <body>
   <%- include('Partials/header') %>
-  <h3><%= action %> category</h3>
-  <%- include('Partials/errors') %>
-  <form action="" method="post">
-    <label for="catName">Category name: </label>
-    <input type="text" name="catName" id="name" value="<%= defVal %>">
-    <button type="submit">Submit</button>
-  </form>
+  <div class="listContent">
+    <h3><%= action %> category</h3>
+    <%- include('Partials/errors') %>
+    <form action="" method="post">
+      <label for="catName">Category name: </label>
+      <input type="text" name="catName" id="name" value="<%= defVal %>">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <%- include('Partials/footer') %>
 </body>
-<%- include('Partials/footer') %>
 </html>
